@@ -1,6 +1,6 @@
 *.pyc
 *~
-.DS_Store*
+
 intro_to_pytorch.py
 pytorch-playground.py
 to_review.txt
