@@ -1,0 +1,72 @@
+id,name,summary,physical,outside,medical,highintensity,weatherdependent,multi_participant,ftm
+1,Listening to radio,Listening to local radio. Possible interaction by phone.,0,0,0,0,0,0,1
+2,Medical consult,Medical consult with personal physician.,1,1,1,0,0,0,0
+3,Walk,A walk in a local park.,1,1,0,0,1,0,1
+4,Mess assistance,Mess assistance on local church.,1,0,0,0,0,0,1
+5,Physical exercise,Medical recommended physical exercise at home.,1,0,1,1,0,0,1
+6,Physical exercise,Medical recommended physical exercise outside.,1,1,1,1,1,0,1
+7,Physical exercise,Medical recommended light physical exercise at home.,1,0,1,0,0,0,1
+8,Reading,Reading a book or magazine outside.,0,1,0,0,1,0,1
+9,Reading,Reading a book or magazine.,0,0,0,0,0,0,1
+10,Playing games,Playing cognitive games accompanied.,0,0,0,0,0,1,1
+11,Playing games,Playing cognitive games solo.,0,0,0,0,0,0,1
+12,Playing games,Playing cognitive games accompanied at friend's house.,0,0,0,0,0,1,1
+13,Playing games,Playing cognitive games accompanied at day-centre.,0,0,0,0,0,1,1
+14,Watching tv,Watching tv at home.,0,0,0,0,0,0,1
+15,Watching movies,Watching movies at home.,0,0,0,0,0,0,1
+16,Cinema,Going to cinema.,0,0,0,0,0,0,1
+17,Bake pastries,Bake pastries.,0,0,0,0,0,0,1
+18,Indoor gardening,Indoor gardening.,0,0,0,0,0,0,1
+19,Laundry,Doing laundry.,0,0,0,0,0,0,1
+20,Outdoor gardening,Outdoor gardening.,1,1,0,0,1,0,1
+21,Outdoor gardening,Outdoor gardening.,1,1,0,1,1,0,1
+22,Playing games,Playing indoors physical games accompanied.,1,0,0,1,0,1,1
+23,Playing games,Playing outdoors physical games accompanied.,1,1,0,1,1,1,1
+24,Bocce game,Collaborative bocce game.,1,1,0,0,1,1,1
+25,Gymnasium,Medical recommended physical exercise at a gymnasium.,1,0,1,1,0,0,1
+26,Pool,Medical recommended physical exercise at a pool.,1,0,1,1,0,0,1
+27,Medication reminder,Medication reminder of #1 dosis #2 ,0,0,1,0,0,0,1
+28,Visit son,Visit #1,0,0,0,0,0,0,1
+29,Visit daughter,Visit #1,0,0,0,0,0,0,1
+30,Visit grandsons,Visit #1,1,0,0,0,0,0,1
+31,Playing Games,Bingo,0,0,0,0,0,1,1
+32,Music,Music listening (alone),0,0,0,0,0,0,1
+33,Music,Music listening (group),0,0,0,0,0,1,1
+34,Music,Music learning,0,0,0,0,0,1,1
+35,Music,Karaoke,0,0,0,0,0,0,1
+36,Music,Karaoke,0,0,0,0,0,1,1
+37,Religious,Assisting to mess,0,0,0,0,0,0,1
+38,Religious,Assisting to mess in church,0,1,0,0,0,0,1
+39,Religious,Assisting to mess in church,0,1,0,0,0,1,1
+40,Religious,Praying,0,0,0,0,0,0,1
+41,Religious,Praying,0,0,0,0,0,1,1
+42,Medical consult,Analisis,1,1,1,0,0,0,0
+43,Buying,Groceries,1,1,0,0,1,0,1
+44,Buying,Groceries,1,1,0,1,1,0,1
+45,Buying,Groceries,1,1,0,0,0,0,1
+46,Buying,Groceries,1,1,0,1,1,1,1
+47,Buying,Groceries,1,1,0,0,0,1,1
+48,Indoor gardening,Indoor gardening.,1,0,0,1,0,0,1
+49,Pet,Pet caretaking,0,0,0,0,0,0,1
+50,Pet,Pet caretaking,1,0,0,0,0,0,1
+51,Arts,Crocheting,0,0,0,0,0,0,1
+52,Arts,Crocheting,0,0,0,0,0,1,1
+53,Arts,Drawing,0,0,0,0,0,0,1
+54,Arts,Drawing,0,1,0,0,0,0,1
+55,Arts,Drawing,0,0,1,0,0,0,1
+56,Arts,Drawing,0,1,1,0,0,0,1
+57,Arts,Drawing,0,0,0,0,0,1,1
+58,Arts,Drawing,0,1,0,0,0,1,1
+59,Arts,Drawing,0,0,1,0,0,1,1
+60,Arts,Drawing,0,1,1,0,0,1,1
+61,Call parents,Call your parents and check on them.,0,0,0,0,0,0,1
+62,Cognitive games,Play a cognitive engaging video game.,0,0,0,0,0,0,1
+63,Walking,Go for a walk.,0,0,0,0,0,0,1
+64,Hobby,Watch your favorite tv series.,0,0,0,0,0,0,1
+65,Hobby,Go watch a movie in the cinema.,0,0,0,0,0,0,1
+66,Home activities,Do laundry.,0,0,0,0,0,0,1
+67,Learning,Read a book or magazine.,0,0,0,0,0,0,1
+68,Shopping,Do the grocery.,0,0,0,0,0,0,1
+69,Hacking,Hack the world.,0,0,0,0,0,0,1
+70,Learning,Learn a new programming language.,0,0,0,0,0,0,1
+71,Mindfulness,Reflect on your existence.,0,0,0,0,0,0,1

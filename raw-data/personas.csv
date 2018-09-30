@@ -1,0 +1,11 @@
+0,System,-,1,1,1,0,1
+1,Fully Active with no medical problems,-,1,1,1,0,1
+2,Fully Active with mild physical problems,-,2,1,2,1,1
+3,Partially Active with moderate physical problems,-,3,1,3,1,2
+4,Partially Active with severe physical problems,-,3,3,4,1,2
+5,Inactive with severe physical problems,-,3,2,4,1,2
+6,Partially Active with mild Psychological problems,-,2,3,2,2,1
+7,Partially Active with moderate Psychological problems,-,2,3,3,2,1
+8,Inactive with severe Psychological problems,-,3,2,4,2,2
+9,Outsider,Medic / Relative / Friend,3,2,4,2,2
+10,Fully Active,For testing porpouses,1,1,1,0,1

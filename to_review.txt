@@ -1,0 +1,17 @@
+[2018-09-22]
+
+[1] Batch Normalization
+    - It's a technique for normalizing inputs at intermediate layers so as to
+      speed up the learning process and bring some regularization in.
+[2] Momentum
+    - Physically, represents mass in motion.
+    - In terms of machine learning, momentum increases changes torwards the
+      dimensions where gradient did not change direction, thus, increasing
+      the rate of convergence to the local minima.
+[3] Kinetic Energy
+    - It is the energy possessed by a moving object.
+[4] Potential Energy
+    - It is the stored energy possessed by an object.
+[5] Gravitational Energy
+    - Actually, gravitational energy is a subclass of potential energy, namely,
+      the energy stored due to gravity.
