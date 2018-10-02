@@ -36,22 +36,6 @@ model = arm.AutoRecModel(D_in, H)
 # -----------------------------------------------------------------------------
 loss = nn.MSELoss()
 
-def printnorm(self, input, output):
-    # input is a tuple of packed inputs
-    # output is a Tensor. output.data is the Tensor we are interested
-    print('Inside ' + self.__class__.__name__ + ' forward')
-    print('')
-    print('input: ', type(input))
-    print('input[0]: ', type(input[0]))
-    print('output: ', type(output))
-    print('')
-    print('input size:', input[0].size())
-    print('output size:', output.data.size())
-    print('output norm:', output.data.norm())
-
-loss.register_forward_hook(printnorm)
-
-out = net(input)
 
 # -----------------------------------------------------------------------------
 # Optimizer initialization

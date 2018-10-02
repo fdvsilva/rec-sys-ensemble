@@ -125,7 +125,6 @@ def build_matrices():
     ratings = fetch_ratings()
     test_indices, validation_indices, train_indices = split_data(len(ratings))
 
-
     test_matrix = fill_matrix(test_indices, ratings) # Build test rating matrix
     validation_matrix = fill_matrix(validation_indices, ratings) # Build validation rating matrix
     train_matrix = fill_matrix(train_indices, ratings) # Build train rating matrix
@@ -133,6 +132,24 @@ def build_matrices():
     return train_matrix, validation_matrix, test_matrix
 
 
+# -----------------------------------------------------------------------------
+# Builds and returns train matrix
+# -----------------------------------------------------------------------------
+def get_train_matrix():
+    train_matrix, _, _ = build_matrices()
+    return train_matrix
+
+
+# -----------------------------------------------------------------------------
+# Builds and return validation ratings
+# -----------------------------------------------------------------------------
+def get_validation_ratings():
+    validation_ratings = []
+    ratings = fetch_ratings()
+    _, validation_indices, _ = split_data(len(ratings))
+    for index in validation_indices:
+        validation_ratings.append(ratings[index])
+    return validation_ratings
 
 
 # -----------------------------------------------------------------------------

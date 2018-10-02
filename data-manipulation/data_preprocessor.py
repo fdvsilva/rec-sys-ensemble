@@ -55,26 +55,3 @@ def build_preprocessed_ratings_matrix():
 # -----------------------------------------------------------------------------
 # Data preprocessor playground
 # -----------------------------------------------------------------------------
-
-build_ratings_matrix()[5]
-
-scale_ratings(mean_centered_ratings(build_ratings_matrix()))[5]
-
-build_preprocessed_ratings_matrix()[8]
-
-def test():
-    inc = 0
-    ratings = build_preprocessed_ratings_matrix()
-    for i in range(ratings.shape[0]):
-        for j in range(ratings.shape[1]):
-            #print(ratings[i][i])
-            if (ratings[i][j] != -100):
-                inc += 1
-    print(inc)
-
-
-test()
-
-ds.build_matrices()[0][7]
-
-likes['interestlevel'].max()
