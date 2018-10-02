@@ -15,7 +15,6 @@ import torch.nn as nn
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim # Optimization package
-import torch.optim as optim
 import auto_rec_model as arm
 import utils
 

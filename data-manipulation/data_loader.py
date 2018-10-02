@@ -49,7 +49,7 @@ class ValidationDataset(Dataset):
 
     def __getitem__(self, index):
         user_id, activity_id, rating = self.validation_ratings[index]
-        return (activity_id, rating), self.train_matrix[user_id]
+        return self.train_matrix[user_id], (activity_id, rating)
 
 
     def __len__(self):
@@ -72,7 +72,7 @@ def get_validation_data():
 # -----------------------------------------------------------------------------
 # Data loader playground
 # -----------------------------------------------------------------------------
-get_data_loader()
+len(get_validation_data().dataset)
 
 for batch_idx, (target, input) in enumerate(get_validation_data()):
     print(batch_idx, target, input)
