@@ -5,7 +5,8 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 import auto_rec_model as arm
-import preprocessed_data_loader as pdl
+import auto_rec_loss_function as arl
+import data_loader as dl
 import utils
 import math
 
@@ -13,7 +14,7 @@ import math
 # Force custom modules reloading otherwise changes in custom modules after
 # loading will not be taken into account herein!
 # -----------------------------------------------------------------------------
-utils.reload_modules([arm,pdl])
+utils.reload_modules([arm,dl,arl,utils])
 
 
 # -----------------------------------------------------------------------------
@@ -34,13 +35,39 @@ model = arm.AutoRecModel(D_in, H)
 # -----------------------------------------------------------------------------
 # Loss initialization
 # -----------------------------------------------------------------------------
-loss = nn.MSELoss()
+autorec_loss = arl.AutoRec_Loss()
 
 
 # -----------------------------------------------------------------------------
 # Optimizer initialization
 # -----------------------------------------------------------------------------
 optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE)
+
+
+# -----------------------------------------------------------------------------
+# Zero gradients for weights whose input is missing while doing back
+# propagation for the encoder part of the network
+# -----------------------------------------------------------------------------
+def zero_encoder_weights_grads(grad):
+    column_index = 0
+    grad_clone = grad.clone()
+    for rating in model.state_dict().get("input"):
+        if rating < 0:
+            grad_clone[column_index, :] = 0
+        column_index += 1
+    print(grad_clone)
+    return grad_clone
+
+
+# -----------------------------------------------------------------------------
+# Add an hook to function responsible for calculating the gradients of the
+# weights associated with the encoder part of the network.
+# -----------------------------------------------------------------------------
+def add_encoder_grad_hook(encoder_hook):
+    for name, param in model.named_parameters():
+       if name == "encoder.weight":
+           decoder_handle = param.register_hook(encoder_hook)
+    return encoder_handle
 
 
 # -----------------------------------------------------------------------------
@@ -51,9 +78,11 @@ def train_epoch(epoch, model, data_loader, optimizer):
     for batch_idx, (data, target) in enumerate(data_loader):
         optimizer.zero_grad()
         output = model(data)
-        loss = F.nll_loss(output, target)
+        loss = autorec_loss(output, target)
+        encoder_hook_handle = add_encoder_grad_hook(zero_encoder_weights_grads)
         loss.backward()
         optimizer.step()
+        encoder_hook_handle.remove()
         if batch_idx % 10 == 0:
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, batch_idx * len(data), len(data_loader.dataset),

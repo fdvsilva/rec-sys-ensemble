@@ -72,7 +72,9 @@ def get_validation_data():
 # -----------------------------------------------------------------------------
 # Data loader playground
 # -----------------------------------------------------------------------------
+'''
 len(get_validation_data().dataset)
 
 for batch_idx, (target, input) in enumerate(get_validation_data()):
     print(batch_idx, target, input)
+'''
