@@ -23,8 +23,8 @@ utils.reload_modules([arm,dl,arl,utils])
 D_in = D_out = 71 # number of activities
 H = 20
 NUM_EPOCHS = 1
-LEARNING_RATE = 1e-4
-
+LEARNING_RATE = 1e-3
+MOMENTUM = 0.9
 
 # -----------------------------------------------------------------------------
 # Model initialization
@@ -41,7 +41,7 @@ autorec_loss = arl.AutoRec_Loss()
 # -----------------------------------------------------------------------------
 # Optimizer initialization
 # -----------------------------------------------------------------------------
-optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE)
+optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE, momentum=MOMENTUM)
 
 
 # -----------------------------------------------------------------------------
@@ -110,4 +110,4 @@ def validate_epoch(model, data_loader):
 # -----------------------------------------------------------------------------
 for epoch in range(NUM_EPOCHS):
     train_epoch(epoch, model, data_loader, optimizer)
-    validate_epoch(model, data_loader)
+    # validate_epoch(model, data_loader)

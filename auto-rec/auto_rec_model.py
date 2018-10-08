@@ -17,14 +17,29 @@ class AutoRecModel(nn.Module):
         self.decoder = nn.Linear(H, D_in)
         # tie weights
         self.decoder.weight.data = self.encoder.weight.data.transpose(0,1)
+        self.init_weights()
         self.register_buffer('input', torch.zeros(D_in))
 
     def forward(self, x):
-       #hidden_output = F.sigmoid(self.l1(x))
-       #ratings_pred = F.sigmoid(self.l2(hidden_output))
+       # hidden_output = F.sigmoid(self.l1(x))
+       # ratings_pred = F.sigmoid(self.l2(hidden_output))
        self.input = x.clone()
-       #print("size:" + str(x.shape[0]))
+       # print("size:" + str(x.shape[0]))
        #print("input:" + str(self.input))
        hidden_output = self.encoder(x)
        ratings_pred = self.decoder(hidden_output)
        return ratings_pred
+
+    # -----------------------------------------------------------------------------
+    # Init weights auxiliary function
+    # -----------------------------------------------------------------------------
+    def init_weights(self):
+        nn.init.xavier_uniform_(self.encoder.weight)
+
+
+# -----------------------------------------------------------------------------
+# Model Playground
+# -----------------------------------------------------------------------------
+model = AutoRecModel(2, 1)
+
+utils.print_parameters(model)
