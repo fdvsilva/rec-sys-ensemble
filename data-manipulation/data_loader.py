@@ -31,7 +31,15 @@ class TrainDataset(Dataset):
         self.train_matrix = self.train_matrix.type(torch.FloatTensor)
 
     def __getitem__(self, index):
-        return self.train_matrix[index], self.train_matrix[index]
+        cloned_item = self.train_matrix[index].clone()
+        cloned_item[torch.isnan(cloned_item)] = 0
+        return cloned_item, self.train_matrix[index]
+        #return self.train_matrix[index], self.train_matrix[index]
+
+    def fill_missing_ratings(item):
+        cloned_item = item.clone()
+        cloned_item[torch.isnan(cloned_item)] = 0
+        return cloned_item
 
 
     def __len__(self):
@@ -83,5 +91,7 @@ def get_validation_data():
 
 #len(get_validation_data().dataset)
 
-#for batch_idx, (target, input) in enumerate(get_train_data()):
-#    print(batch_idx, target, input, target.type())
+#for batch_idx, (data, target) in enumerate(get_train_data()):
+    #changed = data[0][torch.isnan(data[0])] = 0
+
+#    print(target, data)

@@ -24,8 +24,8 @@ utils.reload_modules([arm,dl,arl,utils])
 D_in = D_out = 71 # number of activities
 H = 20
 NUM_EPOCHS = 1
-LEARNING_RATE = 0.001
-MOMENTUM = 0.9
+LEARNING_RATE = 0.00001
+MOMENTUM = 0 #0.9
 WEIGHT_DECAY =  0#0.5
 
 # -----------------------------------------------------------------------------
@@ -79,13 +79,14 @@ def add_encoder_grad_hook(encoder_hook):
 # -----------------------------------------------------------------------------
 # Train for a single epoch
 # -----------------------------------------------------------------------------
-def train_epoch(epoch, model, data_loader, optimizer):
+def train_epoch(epoch, model, data_loader, optimizer, loss_function):
     #model.train()
     for batch_idx, (data, target) in enumerate(data_loader):
         # print('data: {} | type: {}'.format(data[0], data[0].type()))
         optimizer.zero_grad()
         output = model(data)
-        loss = torch.sqrt(F.mse_loss(output, target))
+        #loss = torch.sqrt(F.mse_loss(output, target))
+        loss = loss_function(output, target)
         #encoder_hook_handle = add_encoder_grad_hook(zero_encoder_weights_grads)
         loss.backward()
         optimizer.step()
@@ -122,8 +123,8 @@ def validate_epoch(model, data_loader):
 # -----------------------------------------------------------------------------
 
 #model = 0
-for epoch in range(100):
-    train_epoch(epoch + 1, model, dl.get_train_data(), optimizer)
+for epoch in range(10):
+    train_epoch(epoch + 1, model, dl.get_train_data(), optimizer, autorec_loss)
     # validate_epoch(model, data_loader)
 
 

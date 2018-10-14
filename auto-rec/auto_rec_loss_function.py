@@ -12,17 +12,16 @@ class AutoRecLoss(torch.nn.Module):
         super(AutoRecLoss,self).__init__()
 
     def forward(self,predicted_ratings, real_ratings):
-        #mask = real_ratings.ge(0)
-        #masked_real_ratings = torch.masked_select(real_ratings, mask)
-        #masked_pred_ratings = torch.masked_select(predicted_ratings, mask)
+        mask = torch.isnan(real_ratings).le(0)
+        masked_real_ratings = torch.masked_select(real_ratings, mask)
+        masked_pred_ratings = torch.masked_select(predicted_ratings, mask)
 
         # Keep commented out!
         # ratings_loss = torch.norm(masked_real_ratings - masked_pred_ratigns)
 
-        #ratings_loss = F.mse_loss(masked_pred_ratings, masked_real_ratings, reduction='sum')
+        mse_loss = F.mse_loss(masked_pred_ratings, masked_real_ratings, reduction='sum')
+        rmse = torch.sqrt(mse_loss/len(masked_real_ratings))
 
-
-        ratings_loss = F.mse_loss(predicted_ratings, real_ratings, reduction='sum')
 
         # No need to add here the regularization factor given that we
         # can achieve the same result by passing a non-zero value to the
@@ -30,13 +29,21 @@ class AutoRecLoss(torch.nn.Module):
         # weights_regularization = (reg_strength/2)*torch.norm(weight)
         # return ratings_loss + weights_regularization
 
-        return ratings_loss
+        return rmse
 
 # -----------------------------------------------------------------------------
 # Loss function playground
 # -----------------------------------------------------------------------------
-
 '''
+a = torch.empty(3,3)
+a[:] = torch.tensor(float('nan'))
+a[1][1] = 3
+a[1][2] = 3
+mask = torch.isnan(a).le(0)
+
+len(torch.masked_select(torch.ones(3,3), mask))
+
+
 a = torch.tensor([[1,1,1,1]], dtype=torch.float)
 W = torch.randn(4,3,requires_grad=True)
 Q = torch.randn(3,4,requires_grad=True)

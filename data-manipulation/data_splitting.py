@@ -142,7 +142,10 @@ def build_matrices():
 # -----------------------------------------------------------------------------
 def get_train_matrix():
     train_matrix, _, _ = build_matrices()
-    return dp.scale_ratings(-1, 1, dp.zero_center_ratings(train_matrix))
+    # We are slicing the returned value because we want to discard the first
+    # row of the ratings matrix as it is assigned to a control user and not
+    # to a real user
+    return dp.scale_ratings(-1, 1, dp.zero_center_ratings(train_matrix))[1:]
     #return train_matrix
 
 
@@ -161,6 +164,7 @@ def get_validation_ratings():
 # -----------------------------------------------------------------------------
 # Data preprocessor playground
 # -----------------------------------------------------------------------------
+get_train_matrix()[0]
 
 '''
 def compare(index):
