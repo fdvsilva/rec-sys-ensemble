@@ -6,19 +6,25 @@ import torch.nn.functional as F
 # Loss function for AutoRec
 # -----------------------------------------------------------------------------
 
-class AutoRec_Loss(torch.nn.Module):
+class AutoRecLoss(torch.nn.Module):
 
     def __init__(self):
-        super(AutoRec_Loss,self).__init__()
+        super(AutoRecLoss,self).__init__()
 
     def forward(self,predicted_ratings, real_ratings):
-        mask = real_ratings.ge(0)
-        masked_real_ratings = torch.masked_select(real_ratings, mask)
-        masked_pred_ratings = torch.masked_select(predicted_ratings, mask)
-        #ratings_loss = torch.norm(masked_real_ratings - masked_pred_ratigns)
-        ratings_loss = F.mse_loss(masked_pred_ratings, masked_real_ratings, reduction='sum')
+        #mask = real_ratings.ge(0)
+        #masked_real_ratings = torch.masked_select(real_ratings, mask)
+        #masked_pred_ratings = torch.masked_select(predicted_ratings, mask)
 
-        # No need to add here the reguralization factor given that we
+        # Keep commented out!
+        # ratings_loss = torch.norm(masked_real_ratings - masked_pred_ratigns)
+
+        #ratings_loss = F.mse_loss(masked_pred_ratings, masked_real_ratings, reduction='sum')
+
+
+        ratings_loss = F.mse_loss(predicted_ratings, real_ratings, reduction='sum')
+
+        # No need to add here the regularization factor given that we
         # can achieve the same result by passing a non-zero value to the
         # optimizer argument named weight_decay;
         # weights_regularization = (reg_strength/2)*torch.norm(weight)
@@ -54,6 +60,7 @@ loss.backward()
 
 print(Q.grad)
 print(W.grad)
+
 
 
 def add_grad_hook(encoder_hook):

@@ -1,14 +1,18 @@
 import sys
 sys.path.insert(0, '/Users/utxeee/Desktop/deep-learning-com-perfis/code/pyTorch/utils')
 import numpy as np
+from numpy import array
+from sklearn import preprocessing
+from sklearn.preprocessing import StandardScaler
 import raw_data_loader as rdl
+import data_preprocessor as dp
 import utils
 
 # -----------------------------------------------------------------------------
 # Force custom modules reloading otherwise changes in custom modules after
 # loading will not be taken into account herein!
 # -----------------------------------------------------------------------------
-utils.reload_modules([rdl])
+utils.reload_modules([rdl, dp, utils])
 
 
 # -----------------------------------------------------------------------------
@@ -35,7 +39,8 @@ likes = rdl.get_likes() # Read likes file
 # Gets empty rating "value"
 # -----------------------------------------------------------------------------
 def get_empty_rating():
-    return -likes['interestlevel'].max()
+    return np.nan
+    #return -likes['interestlevel'].max()
 
 # -----------------------------------------------------------------------------
 # Fetch all the rows from likes file for user whose id is `user_id`
@@ -133,11 +138,12 @@ def build_matrices():
 
 
 # -----------------------------------------------------------------------------
-# Builds and returns train matrix
+# Builds and returns train matrix already 0 centered and scaled to [-1,1]
 # -----------------------------------------------------------------------------
 def get_train_matrix():
     train_matrix, _, _ = build_matrices()
-    return train_matrix
+    return dp.scale_ratings(-1, 1, dp.zero_center_ratings(train_matrix))
+    #return train_matrix
 
 
 # -----------------------------------------------------------------------------
@@ -155,3 +161,15 @@ def get_validation_ratings():
 # -----------------------------------------------------------------------------
 # Data preprocessor playground
 # -----------------------------------------------------------------------------
+
+'''
+def compare(index):
+    matrix = get_train_matrix()
+    return (matrix[index], dp.zero_center_ratings(a)[index], dp.scale_ratings(-1, 1, matrix)[index])
+
+dp.zero_center_ratings(get_train_matrix())
+
+compare(1)
+
+get_train_matrix()[1]
+'''

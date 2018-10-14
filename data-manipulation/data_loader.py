@@ -25,6 +25,10 @@ class TrainDataset(Dataset):
         train_matrix = ds.get_train_matrix()
         self.len = train_matrix.shape[0]
         self.train_matrix = torch.from_numpy(train_matrix)
+        # By default the train matrix tensor is a double after converting it
+        # from numpy but the model is expecting a float, hence, we cast the
+        # type here!
+        self.train_matrix = self.train_matrix.type(torch.FloatTensor)
 
     def __getitem__(self, index):
         return self.train_matrix[index], self.train_matrix[index]
@@ -46,6 +50,10 @@ class ValidationDataset(Dataset):
         self.len = len(validation_ratings)
         self.validation_ratings = validation_ratings
         self.train_matrix = torch.from_numpy(train_matrix)
+        # By default the train matrix tensor is a double after converting it
+        # from numpy but the model is expecting a float, hence, we cast the
+        # type here!
+        self.train_matrix = self.train_matrix.type(torch.FloatTensor)
 
     def __getitem__(self, index):
         user_id, activity_id, rating = self.validation_ratings[index]
@@ -72,9 +80,8 @@ def get_validation_data():
 # -----------------------------------------------------------------------------
 # Data loader playground
 # -----------------------------------------------------------------------------
-'''
-len(get_validation_data().dataset)
 
-for batch_idx, (target, input) in enumerate(get_validation_data()):
-    print(batch_idx, target, input)
-'''
+#len(get_validation_data().dataset)
+
+#for batch_idx, (target, input) in enumerate(get_train_data()):
+#    print(batch_idx, target, input, target.type())
