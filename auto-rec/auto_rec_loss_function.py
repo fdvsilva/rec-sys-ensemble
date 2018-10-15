@@ -20,7 +20,7 @@ class AutoRecLoss(torch.nn.Module):
         # ratings_loss = torch.norm(masked_real_ratings - masked_pred_ratigns)
 
         mse_loss = F.mse_loss(masked_pred_ratings, masked_real_ratings, reduction='sum')
-        rmse = torch.sqrt(mse_loss/len(masked_real_ratings))
+        #rmse = torch.sqrt(mse_loss/len(masked_real_ratings))
 
 
         # No need to add here the regularization factor given that we
@@ -29,7 +29,7 @@ class AutoRecLoss(torch.nn.Module):
         # weights_regularization = (reg_strength/2)*torch.norm(weight)
         # return ratings_loss + weights_regularization
 
-        return rmse
+        return mse_loss
 
 # -----------------------------------------------------------------------------
 # Loss function playground

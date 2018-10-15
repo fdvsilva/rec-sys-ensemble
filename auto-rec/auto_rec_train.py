@@ -24,9 +24,9 @@ utils.reload_modules([arm,dl,arl,utils])
 D_in = D_out = 71 # number of activities
 H = 20
 NUM_EPOCHS = 1
-LEARNING_RATE = 0.00001
-MOMENTUM = 0 #0.9
-WEIGHT_DECAY =  0#0.5
+LEARNING_RATE = 1e-2
+MOMENTUM = 0.9
+WEIGHT_DECAY =  0 #0.5
 
 # -----------------------------------------------------------------------------
 # Model initialization
@@ -123,15 +123,16 @@ def validate_epoch(model, data_loader):
 # -----------------------------------------------------------------------------
 
 #model = 0
-for epoch in range(10):
+for epoch in range(1000):
     train_epoch(epoch + 1, model, dl.get_train_data(), optimizer, autorec_loss)
     # validate_epoch(model, data_loader)
 
 
-
+'''
 with torch.no_grad():
     for batch_idx, (target, input) in enumerate(dl.get_train_data()):
         #output = model(target)
         #print(target[0][input[0].item()-1])
         print(target)
         print(model(target))
+'''
