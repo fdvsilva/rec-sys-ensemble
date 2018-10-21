@@ -4,3 +4,4 @@
 *intro_to_pytorch.py
 *pytorch-playground.py
 *.txt
+.ipynb_checkpoints
